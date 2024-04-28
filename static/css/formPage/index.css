@@ -1,0 +1,123 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.details {
+  width: 50%;
+  padding: 50px 70px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo p {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+h2 {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+h5 {
+  font-weight: 300;
+  color: #666;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-right: 100px;
+}
+
+form p label {
+  display: block;
+  /* margin-bottom: 5px; */
+  font-weight: 400;
+  font-size: 15px;
+}
+
+form p input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #f8a607;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  align-self: center;
+  width: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+  background-color: #f8a607;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.register {
+  color: black;
+}
+
+.register a {
+  color: #e79c07;
+  text-decoration: none;
+}
+.camera-container {
+  width: 50%;
+}
+
+.camera-container img {
+  width: auto;
+  height: 100%;
+}
+
+
+/************* Responsive CSS *******************/
+@media screen and (max-width:800px) {
+  .container{
+    flex-direction: column;
+  }
+  .camera-container{
+    display: none;
+  }
+  .details{
+    width: 100%;
+  }
+
+}

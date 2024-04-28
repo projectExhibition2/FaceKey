@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register/register.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+                <p>FaceKey</p>
+            </div>
+            <div class="header_text">
+                <div class="text1">
+                    <h2>"Welcome to <span>FaceKey</span> :</h2>
+                </div>
+                <div class="text2">
+                    <h2>Where Faces Find Their <span>Digital Identity!</span>"</h2>
+                </div>
+            </div>
+        </div>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <p>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </p>
+            <p>
+                <label for="regNum">Registration Number</label>
+                <input type="text" id="regNum" name="regNum" required>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </p>
+            <p>
+                <label for="image">Upload Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            </p>
+            <button type="submit">Submit</button>
+        </form>
+        <footer>
+            <p>Already have an account?  <a href="/">Login</a></p>
+        
+        </footer>
+    </div>
+
+</body>
+
+</html>

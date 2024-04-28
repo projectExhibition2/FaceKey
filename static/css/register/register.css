@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
+}
+
+span {
+  color: #f8a607;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* overflow: hidden; */
+  gap: 10px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 50px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo p {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.header_text {
+  width: 50%;
+}
+.header_text .text2 {
+  text-align: end;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 20px;
+  /* padding-right: 100px; */
+}
+
+form p label {
+  display: block;
+  /* margin-bottom: 5px; */
+  font-weight: 400;
+  font-size: 15px;
+}
+
+form p input {
+  width: 100%;
+  padding: 7px;
+  border: 2px solid #f8a607;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+footer {
+  width: 70%;
+}
+footer p {
+  border-top: 1px solid #555555b0;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+footer a {
+  text-decoration: none;
+  color: #e79c07;
+}
+
+button {
+  align-self: center;
+  width: 100px;
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+  background-color: #f8a607;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/************** Responsive CSS starts here ****************  */
+@media screen and (max-width : 800px) {
+  .header{
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  form{
+    width: 100%;
+    padding: 0px 20px;
+  }
+}
