@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/camera.css') }}" />
+    <title>Camera</title>
+  </head>
+  <body>
+
+    <div>
+      <video id="video" autoplay></video>
+      <canvas id="canvas" style="display: none"></canvas>
+    </div>
+    <div>
+      <button id="captureFace">Capture Face</button>
+      <a href="/register"><button id="Register">Back to Registration page</button></a>
+    </div>
+    <script>
+      const video = document.getElementById('video');
+      const captureFaceButton = document.getElementById('captureFace');
+
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+        })
+        .catch(err => {
+          console.error('Error accessing the camera: ', err);
+        });
+
+      function captureAndSaveImage(title) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        
+        const link = document.createElement('a');
+        link.download = `${title}_image.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }
+
+      captureFaceButton.addEventListener('click', () => captureAndSaveImage('Face'));
+    </script>
+  </body>
+</html>

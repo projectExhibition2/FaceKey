@@ -41,6 +41,7 @@
             <p>
                 <label for="image">Upload Image</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
+                <p>Don't have an image already? <a href="/camera">Click one</a> now</p>
             </p>
             <button type="submit">Submit</button>
         </form>
@@ -49,6 +50,47 @@
         
         </footer>
     </div>
+
+    <script>
+        function captureImage() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const video = document.createElement('video');
+                    video.srcObject = stream;
+                    video.style.display = 'none'; // Hide the video element
+                    document.body.appendChild(video); // Append the video element (off-screen)
+                    video.play();
+        
+                    // Wait for video to play (optional for better image quality)
+                    setTimeout(() => {
+                        const canvas = document.createElement('canvas');
+                        const context = canvas.getContext('2d');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.drawImage(video, 0, 0);
+        
+                        const imageData = canvas.toDataURL('image/jpeg'); // Adjust format as needed
+                        const capturedImageDataField = document.getElementById('capturedImageData');
+                        capturedImageDataField.value = imageData; // Store the dataURL in the hidden field
+        
+                        video.pause();
+                        video.srcObject.getTracks().forEach(track => track.stop());
+                        document.body.removeChild(video); // Remove the video element after use
+                    }, 1000); // adjust timeout as needed
+                })
+                .catch(error => {
+                    console.error("Error accessing camera:", error);
+                });
+        }
+        
+        // Button click event listener
+        document.getElementById('captureImage').addEventListener('click', captureImage);
+        
+    </script>
+    
+    
+    
+    
 
 </body>
 

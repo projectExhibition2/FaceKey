@@ -11,6 +11,7 @@ import numpy as np
 import os
 import json
 from flask_cors import CORS
+from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 CORS(app)
@@ -73,6 +74,10 @@ def index():
 @app.route('/register')
 def register():
     return render_template("register.html")
+
+@app.route('/camera')
+def camera():
+    return render_template("camera.html")
 
 
 
@@ -309,7 +314,7 @@ def authenticate():
             # Check if the password matches
             if user.password == password and user.name == name:
                 # Authentication successful, redirect to a protected route
-                return "authentcation successfull"
+                return ("<h1>Authentcation Successfull</h1>")
             else:
                 # Password incorrect
                 print("Incorrect password or name")
@@ -506,16 +511,29 @@ def upload():
         password = request.form['password']
         image_file = request.files['image']
 
+        # Check if a user with the same regNum already exists
+        existing_user = User.query.filter_by(regNum=regNum).first()
+        if existing_user:
+            return 'User with the same registration number already exists'
+
+        
         # Rename the image file to regNum.jpg
         filename = secure_filename(regNum + '.jpg')
         image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         # Store the form data in the database
-        user = User(name=name, regNum=regNum, password=password, image_path=os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user = User(name=name, regNum=regNum, password=password, image_path=os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            db.session.add(user)
+            db.session.commit()
+            return 'Form data and image uploaded successfully'
+        except IntegrityError:
+            db.session.rollback()
+            # If an IntegrityError occurs, it means that the same image_path already exists
+            return 'Image with the same name already exists'
+        except Exception as e:
+            return f'Error: {str(e)}'
 
-        return 'Form data and image uploaded successfully'
 
     return render_template('upload.html')
 
